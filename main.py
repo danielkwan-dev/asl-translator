@@ -27,12 +27,7 @@ logging.getLogger('mediapipe').setLevel(logging.ERROR)
 from contextlib import contextmanager, redirect_stderr, redirect_stdout
 
 @contextmanager
-def suppress_stdout_stderr():
-    """A context manager that redirects stdout and stderr to devnull at the FD level."""
-    # On Windows, redirecting FDs while Rich is active can cause OSError [WinError 1].
-    # We'll use a safer approach: only redirect FD 2 (stderr) which has most noise,
-    # and handle FD 1 (stdout) carefully if needed.
-    
+def suppress_stdout_stderr():    
     stderr_fd = sys.stderr.fileno()
     stdout_fd = sys.stdout.fileno()
     
